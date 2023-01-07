@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Parcel Sandbox</title>
+	<meta charset="UTF-8" />
+	<style>
+    .chat-container {
+      width: 80%;
+      height: 400px;
+      background-color: #eee;
+      overflow-y: auto;
+    }
+
+    .user-chat-bubble {
+      float: right;
+      background-color: #6aa5db;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    .other-user-chat-bubble {
+      float: left;
+      background-color: #f1f0f0;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .chat-container {
+        width: 100%;
+        height: auto;
+      }
+    }
+    </style>
+</head>
+
+<body>
+	<div id="app"></div>
+	<div class="chat-container">
+		<div class="user-chat-bubble">
+			Hi, how are you?
+		</div>
+		<div class="other-user-chat-bubble">
+			I'm doing well, thanks for asking. How about you?
+		</div>
+	</div>	
+</body>
+
+</html>

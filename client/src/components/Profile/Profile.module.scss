@@ -1,0 +1,92 @@
+$accent: #60a0f9;
+
+
+.profile {
+
+} 
+
+.profileInfo {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.userImg {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.userImgContainer {
+    position: relative;
+    height: 140px;
+    width: 140px;
+    margin: auto;
+    border-radius: 50%;
+    // border: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadImgInput { 
+ display: none;
+}
+
+.uploadImgBtn {
+    border: none;
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.209);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    border-radius: 5%;
+    padding: 3px 35px;
+}
+
+.editProfileButton {
+    border: none;
+    background-color: $accent;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.profileTabs {
+    border-top: 1px solid $accent;
+    padding: 30px 10px;
+    // border-bottom: 1px solid gainsboro;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profileTab {
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    color: grey;
+    cursor: pointer;
+
+}
+
+.activeTab {
+    color: black;
+    border-bottom: 2px solid $accent;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    align-items:center;
+
+}
+
+.formBtn {
+    border-radius: 0 5px 5px 0 !important;
+    text-transform: uppercase;
+}

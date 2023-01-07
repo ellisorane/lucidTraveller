@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+
+$accent: #60a0f9;
+
+.navbar {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    // border-bottom: 1px solid rgb(172, 172, 172);
+    border-bottom: 1px solid $accent;
+    height: 5vh;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.navBrand {
+    font-family: 'Prosto One', cursive;
+    font-size: 1.8rem;
+}
+
+.navLinks {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    font-size: 1.6rem;
+    z-index: 2000;
+
+    a {
+        color: rgb(34, 34, 34);
+        text-decoration: none;
+        margin: 15px 0;
+    }
+}
+
+.closeNavDiv {
+    // border-bottom: 1px solid rgb(172, 172, 172);
+    border-bottom: 1px solid $accent;
+    width: 100%;
+    margin: 0;
+    
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        height: 5vh;
+
+    }
+    
+}
+
+.closeNav {
+    border: none;
+    background-color: transparent;
+    font-size: 1.7rem;
+}
+
+.toggle {
+    padding: 5px;
+    cursor: pointer;
+
+    div {
+        width: 20px; 
+        height: 3px; 
+        background-color: rgb(41, 41, 41); 
+        margin: 2px 0;
+    }
+}
