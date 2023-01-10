@@ -16,7 +16,7 @@ function Traveller ({ isFriend }) {
       </div>
 
       <div className={ classes.travellerActions }>
-        <Link to="/chat"><button title={ 'Chat' } style={{ color: '#60a0f9' }}><MdOutlineChat /></button></Link>
+        <Link to="/chat"><button title={ 'Chat' }><MdOutlineChat /></button></Link>
         {/* Goes to travellers/username/journal */}
         <button title={ 'Dream Journal' }><BsJournals /></button> 
       </div>

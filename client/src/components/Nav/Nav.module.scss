@@ -17,12 +17,20 @@ $accent: #60a0f9;
 }
 
 .navBrand {
-    font-family: 'Prosto One', cursive;
-    font-size: 1.8rem;
+    // font-family: 'Prosto One', cursive;
+    // font-size: 1.8rem;
+
+    img {
+        width: 200px;
+        height: auto;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
 }
 
 .navLinks {
-    display: none;
     display: flex;
     flex-direction: column;
     // justify-content: space-around;
@@ -35,12 +43,23 @@ $accent: #60a0f9;
     background-color: rgb(255, 255, 255);
     font-size: 1.6rem;
     z-index: 2000;
+    transform: translateY(-100%);
+    transition: all 0.2s;
 
     a {
         color: rgb(34, 34, 34);
         text-decoration: none;
         margin: 15px 0;
     }
+}
+
+.navOpen {
+    display: flex;
+    transform: translateY(0);
+}
+
+.activeNav {
+    border-bottom: 2px solid $accent;
 }
 
 .closeNavDiv {
@@ -55,7 +74,6 @@ $accent: #60a0f9;
         align-items: center;
         padding: 10px;
         height: 5vh;
-
     }
     
 }
@@ -63,7 +81,8 @@ $accent: #60a0f9;
 .closeNav {
     border: none;
     background-color: transparent;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
+    color: black;
 }
 
 .toggle {

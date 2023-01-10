@@ -13,24 +13,23 @@ $accent: #60a0f9;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .addJournalEntry {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 50%;
-        // background-color: rgb(98, 98, 98);
-        background-color: $accent;
-        color: #fff;
-        text-align: center;
-        line-height: 50px;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
 }
 
+.addJournalEntryBtn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    // background-color: rgb(98, 98, 98);
+    background-color: $accent;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
 .addJournalEntryForm {
     
 }
@@ -77,22 +76,31 @@ $accent: #60a0f9;
     // Center an absolute div
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    // For animation
+    transform: translate(-50%, -1500%);
+    transition: all 0.2s;
+    opacity: 0;
+}
 
-    .option {
-        text-transform: uppercase;
-        border: none;
-        color: white;
-        background-color: $accent;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin: 10px;
-        width: 60%;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.showOptions {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+
+.option {
+    text-transform: uppercase;
+    border: none;
+    color: white;
+    background-color: $accent;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    width: 60%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .userImg {

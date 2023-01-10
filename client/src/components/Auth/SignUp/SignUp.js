@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import classes from './SignUp.module.scss';
+import logo from '../../../assets/images/logo.png'
+
+import classes from '../Auth.module.scss'
+
 
 function SignUp() {
   return (
-    <div className={ classes.signUp }>
-        <form className={ classes.signupForm }>
-            <h3 style={{ marginTop: '0', textDecoration: 'underline' }}>Sign Up for lucidTravellers</h3>
+    <div className={ classes.auth }>
+        <form className={ classes.authForm }>
+            <h2 style={{ marginTop: '0', textDecoration: 'underline' }}>Sign up for lucidTravellers</h2>
 
             {/* Error */}
             <p style={{ color: 'red' }}>Please enter a valid email.</p>
@@ -21,7 +24,7 @@ function SignUp() {
             <label htmlFor='password'>Password:</label><br />
             <input type="password" name="password" placeholder="Enter your password" /><br />
 
-            <label htmlFor='username'>Username:</label><br />
+            <label htmlFor='username'>Confirm Password:</label><br />
             <input type="password" name="confirm" placeholder="Re-enter your password" /><br />
             <input type="submit" name="signUp" value="Sign Up" /><br />
 

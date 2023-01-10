@@ -39,41 +39,42 @@ function Profile() {
                 {/* Lucidity Level */}
                 <p><strong>Lucidity level:</strong> Beginner</p>
                 
-                {/* Edit profile btn */}
+                {/* Edit profile btn - only show if the profile page is for the current user */}
                 <button className={ classes.editProfileButton } onClick={ () => setShowEditOptions( true ) }>Edit Profile</button>
+
+                {/* Follow/unfollow - Only show if user is view another profile */}
+                <button className={ classes.editProfileButton }>Follow</button>
             </div>
         </div>
 
         {/* Edit options and backdrop */}
         { showEditOptions && <Backdrop click={ () => setShowEditOptions( false ) } /> }
 
-        { showEditOptions && 
-            <FormTemplate>
-                <h3 style={{ textAlign: 'center' }}>Edit Profile</h3>
-                <label htmlFor="username">Username:</label><br />
-                <div className={ classes.formGroup }>
-                    <input type="text" id="" name="username" value={ 'John Smith' } disabled /><button className={ classes.formBtn }>Change</button><br />
-                </div>
-                <label htmlFor="password">Password:</label><br />
-                <div className={ classes.formGroup }>
-                    <input type="password" id="" name="password" value={ '123456' } disabled /><button className={ classes.formBtn }>Change</button><br />
-                </div>
-                {/* Hide confirm password field unless changing password */}
-                <label htmlFor="password">Confirm Password:</label><br />
-                <div className={ classes.formGroup }>
-                    <input type="confirm" id="" name="confirm-password" value={ '123456' } disabled /><br />
-                </div>    
-                <label htmlFor="lucidity-level">Lucidity Level: </label><br />
-                <select>
-                    <option value="Beginner">Beginner (0 - 1 / week)</option>
-                    <option value="Beginner">Novice (2 - 3 / week)</option>
-                    <option value="Beginner">Intermediate (3 - 5 / week)</option>
-                    <option value="Beginner">Expert (At will)</option>
-                </select><br /><br />
+        <FormTemplate showForm={ showEditOptions }>
+            <h3 style={{ textAlign: 'center' }}>Edit Profile</h3>
+            <label htmlFor="username">Username:</label><br />
+            <div className={ classes.formGroup }>
+                <input type="text" id="" name="username" value={ 'John Smith' } disabled /><button className={ classes.formBtn }>Change</button><br />
+            </div>
+            <label htmlFor="password">Password:</label><br />
+            <div className={ classes.formGroup }>
+                <input type="password" id="" name="password" value={ '123456' } disabled /><button className={ classes.formBtn }>Change</button><br />
+            </div>
+            {/* Hide confirm password field unless changing password */}
+            <label htmlFor="password">Confirm Password:</label><br />
+            <div className={ classes.formGroup }>
+                <input type="confirm" id="" name="confirm-password" value={ '123456' } disabled /><br />
+            </div>    
+            <label htmlFor="lucidity-level">Lucidity Level: </label><br />
+            <select>
+                <option value="Beginner">Beginner (0 - 1 / week)</option>
+                <option value="Beginner">Novice (2 - 3 / week)</option>
+                <option value="Beginner">Intermediate (3 - 5 / week)</option>
+                <option value="Beginner">Expert (At will)</option>
+            </select><br /><br />
 
-                <input type="submit" value="Submit"></input>
-            </FormTemplate>
-        }
+            <input type="submit" value="Submit"></input>
+        </FormTemplate>
 
 
         {/* border top - Journals and friends Tabs - border bottom */}

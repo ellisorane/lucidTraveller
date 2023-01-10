@@ -4,7 +4,7 @@ import classes from './FormTemplate.module.scss'
 
 function FormTemplate( props ) {
   return (
-    <form className={ classes.formTemplate }>
+    <form className={ `${ classes.formTemplate } ${ props.showForm ? classes.showForm : undefined }` }>
         { props.children }
     </form>
   )

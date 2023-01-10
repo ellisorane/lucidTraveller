@@ -9,8 +9,8 @@ const Journal = React.lazy( () => import('./components/Journal/Journal') )
 const Travellers = React.lazy( () => import('./components/Travellers/Travellers') )
 const Chat = React.lazy( () => import('./components/Chat/Chat') )
 const Profile = React.lazy( () => import('./components/Profile/Profile') )
-const SignUp = React.lazy( () => import('./components/SignUp/SignUp') )
-const SignIn = React.lazy( () => import('./components/SignIn/SignIn') )
+const SignUp = React.lazy( () => import('./components/Auth/SignUp/SignUp') )
+const SignIn = React.lazy( () => import('./components/Auth/SignIn/SignIn') )
 
 function App() {
   return (

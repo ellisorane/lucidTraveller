@@ -1,12 +1,10 @@
 import React from 'react'
 import { FiLock } from 'react-icons/fi'
-import { MdPublic } from 'react-icons/md'
 import { SlOptions } from 'react-icons/sl'
 import classes from './Journal.module.scss'
 import defaultUserImg from '../../assets/images/default.jpg'
 
 const Backdrop = React.lazy( () => import('../Backdrop/Backdrop') )
-const FormTemplate = React.lazy( () => import('../FormTemplate/FormTemplate') )
 
 function JournalEntry() {
   const [showOptions, setShowOptions] = React.useState( false )
@@ -29,12 +27,12 @@ function JournalEntry() {
 
           {/* Show Options div - default hidden */}
           { showOptions && <Backdrop click={ () => setShowOptions( false ) } /> }
-          { showOptions && 
-            <div className={ classes.options }>
-              <div className={ classes.option }>Edit</div>
-              <div className={ classes.option }>Delete</div>
-              <div className={ classes.option }>Make public</div>
-          </div> }
+          
+          <div className={ `${classes.options} ${ showOptions ? classes.showOptions : undefined }` }>
+            <div className={ classes.option }>Edit</div>
+            <div className={ classes.option }>Delete</div>
+            <div className={ classes.option }>Make public</div>
+          </div>
 
         </div>
         {/* End of first row */}

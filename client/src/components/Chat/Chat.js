@@ -18,9 +18,9 @@ function Chat() {
   return (
     <div className={ classes.chat }>
       <div className={ classes.chatHeader }>
-        <Link to='/travellers' style={{ fontSize: '1.7rem', color: '#60a0f9' }}><BsFillArrowLeftCircleFill /></Link>
-        <img className={classes.userImg} src={ defaultUserImg } alt={ 'Dreamer' } />
-        <div className={classes.userName}>Jane Smith</div>
+        <Link to={-1} style={{ fontSize: '1.7rem', color: '#60a0f9' }}><BsFillArrowLeftCircleFill /></Link>
+        <img className={ classes.userImg } src={ defaultUserImg } alt={ 'Dreamer' } />
+        <div className={ classes.userName }>Jane Smith</div>
       </div>
 
       <div className={ classes.chatBody }>

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import classes from './SignIn.module.scss';
+import classes from '../Auth.module.scss';
 
 function SignIn() {
   return (
-    <div className={ classes.signUp }>
-        <form className={ classes.signInForm }>
-            <h3 style={{ marginTop: '0', textDecoration: 'underline' }}>Login to lucidTravellers</h3>
+    <div className={ classes.auth }>
+        <form className={ classes.authForm }>
+            <h2 style={{ marginTop: '0', textDecoration: 'underline' }}>Login to lucidTravellers</h2>
 
             {/* Error */}
             <p style={{ color: 'red' }}>Incorrect credentials. Please try again</p>
