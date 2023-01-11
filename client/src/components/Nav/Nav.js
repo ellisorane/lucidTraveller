@@ -17,14 +17,13 @@ function Nav() {
 
             <div className={ `${ classes.navLinks } ${ showNav ? classes.navOpen : undefined }` }>
                 <div className={ classes.closeNavDiv }>
-                    <div>
-                        <div className={ classes.navBrand } onClick={ () => setShowNav(false) }><Link to='/'><img src={ logo } alt={ 'Logo' } /></Link></div>
+                        <div className={ classes.navBrandOpen } onClick={ () => setShowNav(false) }><Link to='/'><img src={ logo } alt={ 'Logo' } /></Link></div>
                         <button className={ classes.closeNav } onClick={ () => setShowNav(!showNav) }><GrClose /></button>
-                    </div>
                 </div>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/" onClick={ () => setShowNav(false) }>Journal</NavLink>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/travellers" onClick={ () => setShowNav(false) }>Travellers</NavLink>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/chat" onClick={ () => setShowNav(false) }>Chat</NavLink>
+                {/* Chat should be integrated into the Travellers page. The nav link is for development only. */}
+                {/* <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/chat" onClick={ () => setShowNav(false) }>Chat</NavLink> */}
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/profile" onClick={ () => setShowNav(false) }>Profile</NavLink>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signIn" onClick={ () => setShowNav(false) }>Sign In</NavLink>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signup" onClick={ () => setShowNav(false) }>Sign Up</NavLink>
