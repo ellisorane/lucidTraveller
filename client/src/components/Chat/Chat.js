@@ -34,10 +34,11 @@ function Chat() {
 
         <div className={ classes.chatBottom } ref={ bottomDiv }></div>
       </div>
-        <div className={ classes.chatInputContainer }>
-          <input type={ 'text' } name='chat' className={ classes.chatInput } />
-          <div style={{ fontSize: '1.7rem', color: 'rgb(98, 98, 98)' }}><MdSend /></div>
-        </div>
+      
+      <div className={ classes.chatInputContainer }>
+        <input type={ 'text' } name='chat' className={ classes.chatInput } />
+        <div style={{ fontSize: '1.7rem', color: 'rgb(98, 98, 98)' }}><MdSend /></div>
+      </div>
 
     </div>
   )

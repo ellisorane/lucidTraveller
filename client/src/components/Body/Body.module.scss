@@ -5,3 +5,9 @@
     background-color: rgb(255, 255, 255);
     position: relative;
 }
+
+@media( min-width:768px ) {
+    .body {
+        max-width: 1000px;
+    }
+}
