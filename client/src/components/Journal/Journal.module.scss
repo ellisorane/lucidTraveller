@@ -113,3 +113,9 @@ $accent: #60a0f9;
 .contentRow {   
 
 }
+
+@media( min-width: 768px ) {
+    .options {
+        width: 30%;
+    }
+}

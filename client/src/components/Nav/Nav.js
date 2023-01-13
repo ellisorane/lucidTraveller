@@ -17,8 +17,10 @@ function Nav() {
 
             <div className={ `${ classes.navLinks } ${ showNav ? classes.navOpen : undefined }` }>
                 <div className={ classes.closeNavDiv }>
+                    <div>
                         <div className={ classes.navBrandOpen } onClick={ () => setShowNav(false) }><Link to='/'><img src={ logo } alt={ 'Logo' } /></Link></div>
                         <button className={ classes.closeNav } onClick={ () => setShowNav(!showNav) }><GrClose /></button>
+                    </div>
                 </div>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/" onClick={ () => setShowNav(false) }>Journal</NavLink>
                 <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/travellers" onClick={ () => setShowNav(false) }>Travellers</NavLink>

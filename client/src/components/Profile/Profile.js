@@ -43,7 +43,7 @@ function Profile() {
                 <button className={ classes.editProfileButton } onClick={ () => setShowEditOptions( true ) }>Edit Profile</button>
 
                 {/* Follow/unfollow - Only show if user is view another profile */}
-                <button className={ classes.editProfileButton }>Follow</button>
+                {/* <button className={ classes.editProfileButton }>Follow</button> */}
             </div>
         </div>
 
