@@ -15,14 +15,15 @@ function SignUp() {
     confirm: ''
   })
 
-  const [errorMsg, setErrorMsg] = React.useState({
-    email: '',
-    username: '',
-    password: '',
-    confirm: ''
-  })
+  const [errorMsg, setErrorMsg] = React.useState({  })
 
   const onChangeFormData = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const errorHandler = (errors) => {
+    for( const key in errors ) {
+      setErrorMsg({ [key]: errors[key] })
+    }
+  }
 
   const { email, username, password, confirm } = formData
 
@@ -40,18 +41,29 @@ function SignUp() {
 
     try {
         const res = await axios.post('/user/register', data, config);
-        console.log(res)
-        console.log(res.status)
+        // Check for form error messages from mongoose validation
+        // If errors were found
+        if( res.data.errors ) {
+          errorHandler(res.data.errors)
+          console.log( res.data.errors )
+
+        } else {
+          // If no errors were found
+          console.log( res.data )
+          // console.log(res.status)
+        }
+        // Reset form
         // setFormData({
         //   email: '',
         //   username: '',
         //   password: '',
         //   confirm: ''
         // });
-        window.scrollTo(0, 0);
+        // Scroll back to top of page
+        window.scrollTo(0, 0)
         
     } catch(err) {
-        console.error(err.message);
+        console.log(err)
     }
   }
   return (
