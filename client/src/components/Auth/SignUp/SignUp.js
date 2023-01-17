@@ -15,19 +15,12 @@ function SignUp() {
     confirm: ''
   })
 
-  const [ errorMsg, setErrorMsg ] = React.useState({
-    username: {},
-    email: {},
-    password: {}
-  })
+  const [ errorMsg, setErrorMsg ] = React.useState({ })
 
   const onChangeFormData = ( e ) => setFormData({ ...formData, [ e.target.name ]: e.target.value });
 
   const errorHandler = ( errors ) => {
-    for( const key in errors ) {
-      setErrorMsg({ ...errorMsg, [ key ]: errors[ key ], })
-      // console.log( key, errors[ key ])
-    }
+    setErrorMsg({ errors })
   }
 
   const { email, username, password, confirm } = formData
