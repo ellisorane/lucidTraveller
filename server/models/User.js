@@ -7,7 +7,8 @@ const userSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username required"],
-    unique: [true, "Username already taken"]
+    unique: [true, "Username already taken"],
+    minlength: [5, "Username must be at least 5 characters"]
   },
   email: { 
     type: String,
@@ -18,14 +19,33 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "Password required"],
-    min: [5, "Password must be at least 5 characters"],
-    set: value => bcrypt.hashSync(value, 10)
+    validate: {
+      validator: function(value) {
+        return value.length >= 8;
+      },
+      message: 'Password must be at least 8 characters long.'
+    },
+    // set: value => bcrypt.hashSync(value, 10)
   },
   createdAt: {
     type: Date,
     default: () => Date.now(),
     immutable: true
   }
+});
+
+// Check password validity before hasing it
+userSchema.pre('save', function(next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  bcrypt.hash(this.password, 10, (err, hash) => {
+    if (err) {
+      return next(err);
+    }
+    this.password = hash;
+    next();
+  });
 });
 
 module.exports = User = model('User', userSchema);

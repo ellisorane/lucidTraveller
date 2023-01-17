@@ -20,6 +20,7 @@ router.post('/register', async (req, res) => {
     try {    
         const { username, email, password } = JSON.parse(req.body.form);
         // const { username, email, password } = req.body;
+
         const user = await User.create({
             username,
             email,
@@ -27,10 +28,10 @@ router.post('/register', async (req, res) => {
         })
         // currentUser = user
         res.json(user)
-        // res.json(username)
-        // console.log(req.body.form)
+        
     } catch (error) {
-        res.json(error)
+        res.json( error );
+
     }
 })
 

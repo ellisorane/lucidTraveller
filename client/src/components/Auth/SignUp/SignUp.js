@@ -15,19 +15,24 @@ function SignUp() {
     confirm: ''
   })
 
-  const [errorMsg, setErrorMsg] = React.useState({  })
+  const [ errorMsg, setErrorMsg ] = React.useState({
+    username: {},
+    email: {},
+    password: {}
+  })
 
-  const onChangeFormData = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChangeFormData = ( e ) => setFormData({ ...formData, [ e.target.name ]: e.target.value });
 
-  const errorHandler = (errors) => {
+  const errorHandler = ( errors ) => {
     for( const key in errors ) {
-      setErrorMsg({ [key]: errors[key] })
+      setErrorMsg({ ...errorMsg, [ key ]: errors[ key ], })
+      // console.log( key, errors[ key ])
     }
   }
 
   const { email, username, password, confirm } = formData
 
-  const onSubmitHandler = async(e) => {
+  const onSubmitHandler = async( e ) => {
     e.preventDefault();
 
     const config = {
@@ -37,21 +42,15 @@ function SignUp() {
     }
     const form = JSON.stringify( { email, username, password, confirm } );
     let data = new FormData()
-    data.append('form', form)
+    data.append( 'form', form )
 
     try {
-        const res = await axios.post('/user/register', data, config);
+        const res = await axios.post( '/user/register', data, config );
         // Check for form error messages from mongoose validation
-        // If errors were found
-        if( res.data.errors ) {
-          errorHandler(res.data.errors)
-          console.log( res.data.errors )
-
-        } else {
-          // If no errors were found
-          console.log( res.data )
-          // console.log(res.status)
-        }
+        const errors = res.data.errors
+        console.log( errors )
+        // console.log( res.status )
+        if( errors ) errorHandler( errors )
         // Reset form
         // setFormData({
         //   email: '',
@@ -60,10 +59,10 @@ function SignUp() {
         //   confirm: ''
         // });
         // Scroll back to top of page
-        window.scrollTo(0, 0)
+        window.scrollTo( 0, 0 )
         
-    } catch(err) {
-        console.log(err)
+    } catch( err ) {
+        console.log( 'error: ', err )
     }
   }
   return (
