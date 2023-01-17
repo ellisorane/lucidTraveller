@@ -18,8 +18,7 @@ const { authenticate } = require('../middleware')
 // Register a new user
 router.post('/register', async (req, res) => {
     try {    
-        const { username, email, password } = JSON.parse(req.body.form);
-        // const { username, email, password } = req.body;
+        const { username, email, password } = JSON.parse( req.body.form );
 
         const user = await User.create({
             username,
@@ -27,7 +26,7 @@ router.post('/register', async (req, res) => {
             password
         })
         // currentUser = user
-        res.json(user)
+        res.json( user )
         
     } catch (error) {
         res.json( error );

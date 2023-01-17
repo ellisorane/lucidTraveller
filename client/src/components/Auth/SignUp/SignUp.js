@@ -15,7 +15,7 @@ function SignUp() {
     confirm: ''
   })
 
-  const [ errorMsg, setErrorMsg ] = React.useState({ })
+  const [ errorMsg, setErrorMsg ] = React.useState(null)
 
   const onChangeFormData = ( e ) => setFormData({ ...formData, [ e.target.name ]: e.target.value });
 
@@ -64,7 +64,7 @@ function SignUp() {
             <h2 style={{ marginTop: '0', textDecoration: 'underline' }}>Sign up for lucidTravellers</h2>
 
             {/* Error */}
-            <p style={{ color: 'red' }}>Please enter a valid email.</p>
+            { errorMsg && Object.keys(errorMsg.errors).map( key => <p style={{ color: 'red' }} key={ key }>{  errorMsg.errors[ key ].message }</p> ) }
 
             <label htmlFor='email'>Email:</label><br />
             <input type="email" name="email" placeholder="Enter your email" value={ email }onChange={ (e) => onChangeFormData(e) } /><br />
