@@ -40,6 +40,13 @@ function SignUp() {
         }
     }
 
+    // DO THIS ON THE SERVER SIDE, BUT NOT IN MONGOOSE
+    // Check if password and confirm password are matching
+    if(password !== confirm) {
+      setErrorMsg([ 'Passwords do not match' ])
+      
+    }
+
     const form = JSON.stringify( { email, username, password, confirm } );
     let data = new FormData()
     data.append( 'form', form )
@@ -48,13 +55,12 @@ function SignUp() {
         const res = await axios.post( '/user/register', data, config );
         
         // Check for form error messages from mongoose validation, if no errors then register and log user in
-        // const errors = res.data.errors
+        const errors = res.data.errors
         console.log( res.data )
+        
+        if( errors ) {
 
-        if( password !== confirm || res.data.errors  ) {
-
-          if( password !== confirm ) setErrorMsg([ 'Passwords do not match' ])
-          if( res.data.errors ) errorHandler( res.data.errors )
+          errorHandler( errors )
 
         } else {
 
