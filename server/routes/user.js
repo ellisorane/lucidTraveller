@@ -15,26 +15,33 @@ const User = require('../models/User')
 const { authenticate } = require('../middleware')
 
 
-// Register a new user
-router.post('/register', async (req, res) => {
+// Sign up Route
+router.post('/register', async ( req, res ) => {
     try {    
         const { username, email, password } = JSON.parse( req.body.form );
 
+        // Create new user in the database
         const user = await User.create({
             username,
             email,
             password
         })
-        // currentUser = user
-        res.json( user )
-        
-    } catch (error) {
-        res.json( error );
 
+        // Create JWT token
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+
+        // Send token and user to client and set to current user
+        res.json({
+            token: token,
+            user: user
+        })
+
+    } catch ( error ) {
+        res.json( error  )
     }
 })
 
-// Get the current user
+// Get the current user Route
 router.get('/current', authenticate, async (req, res) => {
     try {
         // res.json(currentUser)
@@ -46,25 +53,27 @@ router.get('/current', authenticate, async (req, res) => {
     }
 })
 
-// Login
-router.post('/login', async (req, res) => {
+// Login Route
+router.post('/login', async ( req, res ) => {
+    const { usernameOrEmail, password } = JSON.parse( req.body.form );
+    // console.log(usernameOrEmail)
     try {
         // Find user in database with username or email
-        let user = await User.findOne({ username: req.body.usernameOrEmail });
-        if (!user) {
-            user = await User.findOne({ email: req.body.usernameOrEmail });
+        let user = await User.findOne({ username: usernameOrEmail })
+        if ( !user ) {
+            user = await User.findOne({ email: usernameOrEmail })
         }
 
         // User not found
-        if(user === null) {
+        if( user === null ) {
             // Production env
-            // return res.status(404).send('Incorrect credentials')
+            // return res.status( 404 ).send( 'Incorrect credentials' )
             // Dev environment
-            return res.status(404).send('User not found')
+            return res.json({ error: 'User not found' } )
         }
 
         // Compare password of user in database and the user trying to login
-        if(await bcrypt.compare(req.body.password, user.password)) {
+        if( await bcrypt.compare( password, user.password ) ) {
             // Create JWT token
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
@@ -74,22 +83,20 @@ router.post('/login', async (req, res) => {
                 user: user
             })
 
-            currentUser = user
-            console.log(currentUser)
         } else {
             // Production env
             // return res.status(404).send('Incorrect credentials')
             // Dev environment
-            return res.status(404).send('Wrong password')
+            return res.json({ error: 'Wrong password' })
         }
 
-    } catch (error) {
-        console.error(error)
-        res.json(error)
+    } catch ( error ) {
+        console.error( error )
+        res.json( error )
     }
 })
 
-// Update user
+// Update user Route
 router.put('/update', async (req, res) => {
     const newData = req.body
     try {
@@ -109,7 +116,7 @@ router.put('/update', async (req, res) => {
     }
 })
 
-// Update user password
+// Update user password Route
 router.put('/password', async (req, res) => {
     const currentPassword = req.body.currentPassword
     const newPassword = req.body.newPassword
@@ -132,7 +139,7 @@ router.put('/password', async (req, res) => {
 })
 
 
-// Delete a user
+// Delete a user Route
 router.delete('/delete', async(req, res) => {
     try {
         const user = await User.findByIdAndDelete(currentUser.id)

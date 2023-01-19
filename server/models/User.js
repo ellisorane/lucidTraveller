@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const bcrypt = require('bcrypt')
+const uniqueValidator = require('mongoose-unique-validator')
 
 
 const userSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username required"],
-    unique: [true, "Username already taken"],
+    unique: true,
     minlength: [3, "Username must be at least 3 characters"]
   },
   email: { 
     type: String,
     required: [true, "Email required"], 
-    unique: [true, "Email already in use"],
+    unique: true,
     match: [ /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Enter a valid email" ]
   },
   password: {
@@ -47,5 +48,8 @@ userSchema.pre('save', function(next) {
     next();
   });
 });
+
+//Check if username/email are already in use
+userSchema.plugin(uniqueValidator, { message: 'This {PATH} is already in use.' });
 
 module.exports = User = model('User', userSchema);
