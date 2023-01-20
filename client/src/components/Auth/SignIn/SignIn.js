@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import  { loadUser, login, logout } from '../../../feature/Auth/authSlice'
 
 import classes from '../Auth.module.scss';
 

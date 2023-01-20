@@ -8,6 +8,7 @@ const authenticate = (req, res, next) => {
         return res.status(401).json({ message: 'Unauthorized' })
     }
 
+    // Verify Token
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if(err) {
             return res.status(403)     
@@ -19,5 +20,5 @@ const authenticate = (req, res, next) => {
 }
 
 module.exports = {
-    authenticate,
+    authenticate
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import  { loadUser, login, logout } from '../../../feature/Auth/authSlice'
 
 import logo from '../../../assets/images/logo.png'
 
@@ -8,11 +10,16 @@ import classes from '../Auth.module.scss'
 
 
 function SignUp() {
+
+  const user = useSelector( state => state.auth.user )
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+
   const [ formData, setFormData ] = React.useState({ 
     email: '',
     username: '',
-    password: '',
-    confirm: ''
+    password: ''
   })
 
   const [ errorMsg, setErrorMsg ] = React.useState([])
@@ -26,7 +33,7 @@ function SignUp() {
     }
   }
 
-  const { email, username, password, confirm } = formData
+  const { email, username, password } = formData
 
   const onSubmitHandler = async( e ) => {
     e.preventDefault();
@@ -39,15 +46,9 @@ function SignUp() {
             'Content-Type': 'application/json'
         }
     }
+    
 
-    // DO THIS ON THE SERVER SIDE, BUT NOT IN MONGOOSE
-    // Check if password and confirm password are matching
-    if(password !== confirm) {
-      setErrorMsg([ 'Passwords do not match' ])
-      
-    }
-
-    const form = JSON.stringify( { email, username, password, confirm } );
+    const form = JSON.stringify( { email, username, password } );
     let data = new FormData()
     data.append( 'form', form )
 
@@ -56,7 +57,6 @@ function SignUp() {
         
         // Check for form error messages from mongoose validation, if no errors then register and log user in
         const errors = res.data.errors
-        console.log( res.data )
         
         if( errors ) {
 
@@ -71,14 +71,13 @@ function SignUp() {
           setFormData({
             email: '',
             username: '',
-            password: '',
-            confirm: ''
+            password: ''
           });
 
           // Save user and token data in the redux authSlice
-
+          dispatch(login(res.data))
           // Redirect user to Journal page
-
+          navigate('/')
 
         }
 
@@ -108,8 +107,6 @@ function SignUp() {
             <label htmlFor='password'>Password:</label><br />
             <input type="password" name="password" placeholder="Enter your password" value={ password }onChange={ (e) => onChangeFormData(e) } /><br />
 
-            <label htmlFor='username'>Confirm Password:</label><br />
-            <input type="password" name="confirm" placeholder="Re-enter your password" value={ confirm }onChange={ (e) => onChangeFormData(e) } /><br />
             <input type="submit" name="signUp" value="Sign Up" /><br />
 
             <Link to="/signIn">Already have an account? Log In here.</Link>

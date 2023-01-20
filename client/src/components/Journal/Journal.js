@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { useSelector, useDispatch } from 'react-redux'
+import  { loadUser, login, logout } from '../../feature/Auth/authSlice'
+
 import classes from './Journal.module.scss'
 
 const JournalEntry = React.lazy( () => import('./JournalEntry') )
@@ -8,6 +11,10 @@ const FormTemplate = React.lazy( () => import('../FormTemplate/FormTemplate') )
 
 function Journal() {
   const [showAddJournalEntry, setShowAddJournalEntry] = React.useState( false )
+
+  const getCurrentUser = () => {
+    // Set up a way to get the current user
+  }
 
   return (
     <div>

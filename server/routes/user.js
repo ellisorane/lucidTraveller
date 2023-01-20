@@ -27,7 +27,7 @@ router.post('/register', async ( req, res ) => {
             password
         })
 
-        // Create JWT token
+        // // Create JWT token 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         // Send token and user to client and set to current user
@@ -37,7 +37,10 @@ router.post('/register', async ( req, res ) => {
         })
 
     } catch ( error ) {
+
         res.json( error  )
+        console.error( error )
+
     }
 })
 
