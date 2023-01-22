@@ -28,7 +28,7 @@ router.post('/register', async ( req, res ) => {
         })
 
         // // Create JWT token 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+        const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
         // Send token and user to client and set to current user
         res.json({
@@ -48,7 +48,7 @@ router.post('/register', async ( req, res ) => {
 router.get('/current', authenticate, async (req, res) => {
     try {
         // res.json(currentUser)
-        console.log("Current user: ", req.user)
+        // console.log("Current user: ", req.user)
         res.json(req.user)
     } catch (error) {
         console.error(error)
@@ -78,7 +78,7 @@ router.post('/login', async ( req, res ) => {
         // Compare password of user in database and the user trying to login
         if( await bcrypt.compare( password, user.password ) ) {
             // Create JWT token
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+            const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
             // Password match send token and user to client and set to current user
             res.json({

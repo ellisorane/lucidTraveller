@@ -9,7 +9,7 @@ import logo from '../../../assets/images/logo.png'
 import classes from '../Auth.module.scss'
 
 
-function SignUp() {
+function SignUp({ getCurrentUser }) {
 
   const user = useSelector( state => state.auth.user )
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ function SignUp() {
 
   const errorHandler = ( errors ) => {
     for( let key in errors ) { 
-      console.log(errors[ key ].message)
+      // console.log(errors[ key ].message)
       setErrorMsg(prevMsg => [ ...prevMsg, errors[key].message ])
     }
   }
@@ -64,8 +64,7 @@ function SignUp() {
 
         } else {
 
-          const data = res.data
-          console.log( res.data )
+          // console.log( res.data )
 
           // Reset form
           setFormData({
@@ -74,10 +73,14 @@ function SignUp() {
             password: ''
           });
 
+          // Logout any existing user
+          dispatch( logout() )
           // Save user and token data in the redux authSlice
-          dispatch(login(res.data))
+          dispatch( login(res.data) )
+          // Load user
+          getCurrentUser()
           // Redirect user to Journal page
-          navigate('/')
+          navigate( '/' )
 
         }
 
@@ -109,7 +112,7 @@ function SignUp() {
 
             <input type="submit" name="signUp" value="Sign Up" /><br />
 
-            <Link to="/signIn">Already have an account? Log In here.</Link>
+            <Link to="/signin">Already have an account? Log In here.</Link>
         </form>
     </div>
   )

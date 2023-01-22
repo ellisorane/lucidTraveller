@@ -6,6 +6,7 @@ const authenticate = (req, res, next) => {
     const token = req.headers['x-access-token']
     if(!token) {
         return res.status(401).json({ message: 'Unauthorized' })
+        // return res.status(401).json({ message: 'Not token found.' })
     }
 
     // Verify Token

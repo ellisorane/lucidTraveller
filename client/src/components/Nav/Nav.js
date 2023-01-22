@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
-import { NavLink, Link  } from 'react-router-dom'
 import { GrClose } from 'react-icons/gr' 
+import { NavLink, Link  } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import  { loadUser, login, logout } from '../../feature/Auth/authSlice'
 
 import logo from '../../assets/images/logo.png'
 
 import classes from './Nav.module.scss'
 
 function Nav() {
+    const user = useSelector( state => state.auth.user )
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [showNav, setShowNav] = useState(false)
+
+    const navLogout = () => {
+        dispatch( logout() )
+        setShowNav(false)
+        navigate( '/signIn' )
+    }
 
 
   return (
@@ -22,14 +34,14 @@ function Nav() {
                         <button className={ classes.closeNav } onClick={ () => setShowNav(!showNav) }><GrClose /></button>
                     </div>
                 </div>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/" onClick={ () => setShowNav(false) }>Journal</NavLink>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/travellers" onClick={ () => setShowNav(false) }>Travellers</NavLink>
+                { user && <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/" onClick={ () => setShowNav(false) }>Journal</NavLink> }
+                { user && <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/travellers" onClick={ () => setShowNav(false) }>Travellers</NavLink> }
                 {/* Chat should be integrated into the Travellers page. The nav link is for development only. */}
                 {/* <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/chat" onClick={ () => setShowNav(false) }>Chat</NavLink> */}
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/profile" onClick={ () => setShowNav(false) }>Profile</NavLink>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signIn" onClick={ () => setShowNav(false) }>Sign In</NavLink>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signup" onClick={ () => setShowNav(false) }>Sign Up</NavLink>
-                <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/logout" onClick={ () => setShowNav(false) }>Logout</NavLink>
+                { user && <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/profile" onClick={ () => setShowNav(false) }>Profile</NavLink> }
+                { !user && <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signin" onClick={ () => setShowNav(false) }>Sign In</NavLink> }
+                { !user && <NavLink className={ ({ isActive }) => isActive ? `${classes.navLink} ${classes.activeNav}` : undefined } to="/signup" onClick={ () => setShowNav(false) }>Sign Up</NavLink> }
+                { user && <div className={ classes.navLink } style={{ cursor: 'pointer' }} onClick={ navLogout }>Logout</div> }
             </div>
 
             <div className={ classes.toggle } onClick={ () => setShowNav(!showNav) }>

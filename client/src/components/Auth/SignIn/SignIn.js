@@ -1,12 +1,16 @@
 import React from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import  { loadUser, login, logout } from '../../../feature/Auth/authSlice'
 
 import classes from '../Auth.module.scss';
 
-function SignIn() {
+function SignIn({ getCurrentUser }) {
+  const user = useSelector( state => state.auth.user )
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [ formData, setFormData ] = React.useState({ 
     usernameOrEmail: '',
@@ -41,8 +45,7 @@ function SignIn() {
           
         } else {
 
-          const data = res.data
-          console.log( res.data )
+          // console.log( res.data )
 
           // Reset form
           setFormData({
@@ -50,9 +53,14 @@ function SignIn() {
             confirm: ''
           });
 
-          // Save user data in the redux authSlice
-
+          // Logout any existing user
+          dispatch( logout() )
+          // Save user and token data in the redux authSlice
+          dispatch( login( res.data ) )
+          // Load user
+          getCurrentUser()
           // Redirect user to Journal page
+          navigate( '/' )
 
 
         }
@@ -81,7 +89,7 @@ function SignIn() {
 
             <input type="submit" name="login" value="Log in" /><br />
 
-            <Link to="/signUp">Don't have an account? Signup here.</Link>
+            <Link to="/signup">Don't have an account? Signup here.</Link>
         </form>
     </div>
   )
